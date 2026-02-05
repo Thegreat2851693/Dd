@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Flex Message Ready</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #eef2ff;
+        }
+        .msg {
+            display: none;
+            padding: 20px 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+        #errorMsg { 
+            color: #d9534f;
+            word-break: break-word;
+            max-width: 80vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="msg" id="loadingMsg">⏳ กำลังเริ่มต้น LIFF และเตรียมการแชร์...</div>
+    <div class="msg" id="successMsg">✅ แชร์ให้เพื่อน ๆ สำเร็จแล้ว</div>
+    <div class="msg" id="errorMsg">❌ เกิดข้อผิดพลาดในการแชร์</div> 
+
+    <script>
+        // กำหนด Flex Message
+        const flexMessage = {
+            type: "flex",
+            altText: "📚 แนะนำหนังสือน่าอ่าน โดย นตท.ชั้นปีที่ 2",
+            contents: {
+                "type": "carousel",
+                "contents": [
+                    {
+                    "type": "bubble",
+                    "body": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                        {
+                            "type": "image",
+                            "url": "https://i.postimg.cc/fbrj6KpQ/ezgif-com-apng-maker-(2).png",
+                            "size": "full",
+                            "animated": true,
+                            "aspectMode": "cover",
+                            "aspectRatio": "2.3:3",
+                            "offsetBottom": "none"
+                        },
+                        {
+                            "type": "button",
+                            "action": {
+                            "type": "uri",
+                            // *** แก้ไข URL ตามที่ระบุ ***
+                            "uri": "https://liff.line.me/2009052874-Lh3b5Y4d",
+                            "label": "    "
+                            },
+                            "position": "absolute",
+                            "offsetTop": "75%",
+                            "offsetEnd": "18%",
+                            "gravity": "bottom",
+                            "offsetStart": "15%",
+                            "offsetBottom": "10%",
+                            "height": "md",
+                            "style": "link"
+                        }
+                        ],
+                        "borderWidth": "none",
+                        "paddingAll": "none"
+                    }
+                    },
+                    {
+                    "type": "bubble",
+                    "hero": {
+                        "type": "image",
+                        "url": "https://i.postimg.cc/g0htHjNK/ezgif-com-apng-maker-(4).png",
+                        "size": "full",
+                        "aspectMode": "cover",
+                        "aspectRatio": "2.9:3",
+                        "animated": true,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://youtube.com/shorts/eCqEzo1GmDk?si=OLAj29U3FQrlCXcn"
+                        }
+                    },
+                    "body": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "backgroundColor": "#9370DB",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": "ชื่อหนังสือ  : สรุปเคมีมัธยมปลาย",
+                            "weight": "bold",
+                            "size": "md",
+                            "color": "#4A148C",
+                            "wrap": true
+                        },
+                        {
+                            "type": "text",
+                            "text": "แนะนำโดย : นตท.บุญพิทักษ์ จันทร์นวล",
+                            "size": "sm",
+                            "color": "#6A1B9A",
+                            "wrap": true
+                        }
+                        ],
+                        "cornerRadius": "none"
+                    }
+                    },
+                    {
+                    "type": "bubble",
+                    "hero": {
+                        "type": "image",
+                        "url": "https://i.postimg.cc/0NSX0jct/ezgif-com-apng-maker-(3).png",
+                        "size": "full",
+                        "aspectMode": "cover",
+                        "aspectRatio": "2.9:3",
+                        "animated": true,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://youtube.com/shorts/pbm3c5S70T0?si=_iY93pELkcjE8VU8"
+                        }
+                    },
+                    "body": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "backgroundColor": "#9370DB",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": "ชื่อหนังสือ : สามก๊ก ตอนสามก๊กรวมเป็นหนึ่ง",
+                            "weight": "bold",
+                            "size": "md",
+                            "color": "#4A148C",
+                            "wrap": true
+                        },
+                        {
+                            "type": "text",
+                            "text": "แนะนำโดย : นตท. พงศธร พิมพ์เทศ",
+                            "size": "sm",
+                            "color": "#6A1B9A",
+                            "wrap": true
+                        }
+                        ],
+                        "cornerRadius": "none"
+                    }
+                    }
+                ]
+            }
+        };
+
+        // ฟังก์ชันช่วยในการสลับการแสดงข้อความ
+        function displayMessage(id) {
+            document.querySelectorAll('.msg').forEach(el => el.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        async function main() {
+            displayMessage('loadingMsg');
+            
+            try {
+                // LIFF ID 2009052874-Lh3b5Y4d
+                await liff.init({ liffId: "2009052874-Lh3b5Y4d" });  
+
+                if (!liff.isLoggedIn()) {
+                    liff.login();
+                    return;
+                }
+                
+                if (!liff.isApiAvailable("shareTargetPicker")) {
+                    throw new Error("API shareTargetPicker ไม่รองรับ (โปรดเปิดในแอป LINE)");
+                }
+
+                document.getElementById("loadingMsg").style.display = "none";
+
+                // เปิดตัวเลือกการแชร์
+                const result = await liff.shareTargetPicker([flexMessage]);
+                
+                if (result) {
+                    displayMessage('successMsg');
+                    setTimeout(() => liff.closeWindow(), 2000);
+                } else {
+                    liff.closeWindow();
+                }
+
+            } catch (err) {
+                console.error("Share Error:", err);
+                const errorMsgElement = document.getElementById('errorMsg');
+                errorMsgElement.innerHTML = `❌ เกิดข้อผิดพลาดในการแชร์: <br> ${err.message || 'ไม่ทราบสาเหตุ'}`;
+                displayMessage('errorMsg'); 
+                setTimeout(() => liff.closeWindow(), 5000); 
+            }
+        }
+
+        main();
+    </script>
+</body>
+</html>
