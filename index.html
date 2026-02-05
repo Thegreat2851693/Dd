@@ -38,7 +38,7 @@
     <div class="msg" id="errorMsg">❌ เกิดข้อผิดพลาดในการแชร์</div> 
 
     <script>
-        // กำหนด Flex Message
+        // กำหนด Flex Message (อัปเดตชุดรูปภาพใหม่)
         const flexMessage = {
             type: "flex",
             altText: "📚 แนะนำหนังสือน่าอ่าน โดย นตท.ชั้นปีที่ 2",
@@ -53,7 +53,7 @@
                         "contents": [
                         {
                             "type": "image",
-                            "url": "https://i.postimg.cc/fbrj6KpQ/ezgif-com-apng-maker-(2).png",
+                            "url": "https://i.postimg.cc/mkZyFgcD/ezgif-com-apng-maker-(5).png",
                             "size": "full",
                             "animated": true,
                             "aspectMode": "cover",
@@ -64,7 +64,6 @@
                             "type": "button",
                             "action": {
                             "type": "uri",
-                            // *** แก้ไข URL ตามที่ระบุ ***
                             "uri": "https://liff.line.me/2009052874-Lh3b5Y4d",
                             "label": "    "
                             },
@@ -86,7 +85,7 @@
                     "type": "bubble",
                     "hero": {
                         "type": "image",
-                        "url": "https://i.postimg.cc/g0htHjNK/ezgif-com-apng-maker-(4).png",
+                        "url": "https://i.postimg.cc/PfFwM49J/ezgif-com-apng-maker-(6).png",
                         "size": "full",
                         "aspectMode": "cover",
                         "aspectRatio": "2.9:3",
@@ -125,7 +124,7 @@
                     "type": "bubble",
                     "hero": {
                         "type": "image",
-                        "url": "https://i.postimg.cc/0NSX0jct/ezgif-com-apng-maker-(3).png",
+                        "url": "https://i.postimg.cc/W17r0vPC/ezgif-com-apng-maker-(7).png",
                         "size": "full",
                         "aspectMode": "cover",
                         "aspectRatio": "2.9:3",
@@ -174,7 +173,7 @@
             displayMessage('loadingMsg');
             
             try {
-                // LIFF ID 2009052874-Lh3b5Y4d
+                // LIFF ID เดิมของคุณ
                 await liff.init({ liffId: "2009052874-Lh3b5Y4d" });  
 
                 if (!liff.isLoggedIn()) {
